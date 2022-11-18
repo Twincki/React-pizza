@@ -19,7 +19,6 @@ function Categories({ value, onClickCategory }) {
               key={i}
               onClick={() => onClickCategory(i)}
               className={value === i ? "active" : ""}
-
             >
               {categoryName}
             </li>
