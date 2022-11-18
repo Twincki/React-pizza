@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import LogoSvg from "../assets/img/pizza-logo.svg";
 
+
+
 function Header() {
   return (
     <div className="header">
