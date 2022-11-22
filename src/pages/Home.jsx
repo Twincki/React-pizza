@@ -7,11 +7,13 @@ import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 
 import Skeleton from "../components/PizzaBlock/Skeleton";
+import Pagination from "../components/Pagination";
 
-export const Home = () => {
+export const Home = ({ searchValue }) => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
+  const [currentPage, setCurrentPage] = React.useState(1);
   const [sortType, setSortType] = React.useState({
     name: "популярности",
     sort: "rating",
@@ -22,13 +24,13 @@ export const Home = () => {
 
   React.useEffect(() => {
     setLoading(true)
-    fetch(`https://6364d2377b209ece0f4f0cfb.mockapi.io/items?${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sortType.sort}&order=desc`)
+    fetch(`https://6364d2377b209ece0f4f0cfb.mockapi.io/items?page=${currentPage}&limit=8&${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sortType.sort}&order=desc`)
       .then((res) => res.json())
       .then((arr) => {
         setItems(arr);
         setLoading(false);
       });
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, currentPage]);
 
 
   const onClickCategory = (index) => {
@@ -39,6 +41,15 @@ export const Home = () => {
     setSortType(index)
   };
 
+  const pizzas = items.filter((obj) => {
+    if (obj.title.toLowerCase().includes(searchValue.toLowerCase()))
+      return true
+    else {
+      return false
+    }
+  }).map((obj) => <PizzaBlock key={obj.id} {...obj} />)
+
+  const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
 
   return (
     <>
@@ -49,9 +60,10 @@ export const Home = () => {
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
         {isLoading
-          ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
-          : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
+          ? skeletons
+          : pizzas}
       </div>
+      <Pagination onChangePage={(number) => setCurrentPage(number)} />
     </>
   );
 };

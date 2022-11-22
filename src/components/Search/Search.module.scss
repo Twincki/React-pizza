@@ -26,3 +26,26 @@
   left: 12px;
   top: 12px;
 }
+
+.iconClear {
+  width: 26px;
+  height: 26px;
+  opacity: 0.3;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 1;
+    width: 27px;
+    height: 27px;
+    right: 11px;
+    top: 11px;
+  }
+}
