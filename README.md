@@ -16,7 +16,7 @@
 
 ### HomePages
 
-![HomePages](Material_for_description/img/homePages.jpg)
+![HomePages](Material_for_description/img/HomePages.jpg)
 
 ### ErrorPages
 
