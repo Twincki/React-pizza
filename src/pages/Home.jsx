@@ -7,9 +7,13 @@ import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 
 import Skeleton from "../components/PizzaBlock/Skeleton";
+
 import Pagination from "../components/Pagination";
 
-export const Home = ({ searchValue }) => {
+import { SearchContext } from "../App";
+
+const Home = () => {
+  const { searchValue } = React.useContext(SearchContext)
   const [items, setItems] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
@@ -19,8 +23,6 @@ export const Home = ({ searchValue }) => {
     sort: "rating",
   }
   );
-
-
 
   React.useEffect(() => {
     setLoading(true)
@@ -49,7 +51,7 @@ export const Home = ({ searchValue }) => {
     }
   }).map((obj) => <PizzaBlock key={obj.id} {...obj} />)
 
-  const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+  const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />)
 
   return (
     <>
