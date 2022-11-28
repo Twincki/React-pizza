@@ -17,7 +17,7 @@ function App() {
   const [searchValue, setSearchValue] = React.useState('');
 
   return (
-    <div classNameName="App">
+    <div className="App">
       <div className="wrapper">
         <SearchContext.Provider value={{ searchValue, setSearchValue }}>
           <Header />
